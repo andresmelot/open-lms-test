@@ -1,0 +1,4 @@
+# Ignore everything in this directory
+src/test/resources/webdriver/windows/*
+# Except this file
+!.gitignore
