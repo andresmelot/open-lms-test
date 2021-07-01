@@ -1,0 +1,48 @@
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.4.34")
+    }
+}
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+dependencies {
+
+    testImplementation('net.serenity-bdd:serenity-core:2.4.34')
+    testImplementation('net.serenity-bdd:serenity-screenplay:2.4.34')
+    testImplementation('net.serenity-bdd:serenity-screenplay-webdriver:2.4.34')
+    testImplementation('net.serenity-bdd:serenity-screenplay-rest:2.4.34')
+    testImplementation('net.serenity-bdd:serenity-ensure:2.4.34')
+    testImplementation('net.serenity-bdd:serenity-assertions:2.4.34')
+    
+    testImplementation('net.serenity-bdd:serenity-cucumber6:2.4.34')
+    testImplementation('io.cucumber:cucumber-core:6.10.4')
+    testImplementation('io.cucumber:cucumber-java:6.10.4')
+    testImplementation('io.cucumber:cucumber-junit:6.10.4')
+
+    testImplementation('org.assertj:assertj-core:3.8.0')
+    testImplementation('org.slf4j:slf4j-simple:1.7.7')
+
+    testImplementation('junit:junit:4.13.2')
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.7.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.2")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+gradle.startParameter.continueOnFailure = true
+test.finalizedBy(aggregate)
